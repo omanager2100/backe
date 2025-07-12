@@ -39,15 +39,20 @@ app.post("/login", (req, res) => {
 
 // 📝 Neue Bestellung
 app.post("/order", (req, res) => {
-  const { username, kundennummer, artikel, verweis } = req.body;
+  const { username, kundennummer, adresse, artikel, verweis } = req.body;
+
+  // 🔍 Debug: prüfen, ob username übergeben wurde
+  console.log("Bestellung empfangen von:", username);
+
   const orders = loadOrders();
   const timestamp = Date.now();
 
-  orders.push({ username, kundennummer, artikel, verweis, status: "offen", timestamp });
+  orders.push({ username, kundennummer, adresse, artikel, verweis, status: "offen", timestamp });
   saveOrders(orders);
 
   res.json({ success: true });
 });
+
 
 // 📦 Alle Bestellungen (admin oder user)
 app.get("/orders/:username", (req, res) => {
