@@ -52,6 +52,11 @@ app.post("/order", (req, res) => {
 
   res.json({ success: true });
 });
+// 📂 Nur temporär!
+app.get("/debug/bestellungen", (req, res) => {
+  const orders = loadOrders();
+  res.json(orders);
+});
 
 
 // 📦 Alle Bestellungen (admin oder user)
